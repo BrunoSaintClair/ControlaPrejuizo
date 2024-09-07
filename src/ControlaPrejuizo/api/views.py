@@ -47,3 +47,21 @@ def apagar_compra(request, id_compra):
         return Response(status=status.HTTP_404_NOT_FOUND)
     compra_a_apagar.delete()
     return Response(status=status.HTTP_202_ACCEPTED)
+
+@api_view(['GET'])
+def filtrar_compras_ano(request, ano):
+    try:
+        compras_filtradas = Compra.objects.filter(data_compra__year=ano)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = CompraSerializer(compras_filtradas, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def filtrar_compras_mes(request, mes, ano):
+    try:
+        compras = Compra.objects.filter(data_compra__year=ano, data_compra__month=mes)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = CompraSerializer(compras, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
