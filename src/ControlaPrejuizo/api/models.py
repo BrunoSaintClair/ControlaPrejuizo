@@ -17,6 +17,10 @@ class Compra(models.Model):
         ('Cuidado pessoal', 'Cuidado Pessoal'),
         ('Transporte', 'Transporte'),
         ('Vestuário', 'Vestuário'),
+        ('Saúde', 'Saúde'),
+        ('Lazer', 'Lazer'),
+        ('Moradia', 'Moradia'),
+        ('Educação', 'Educação'),
         ('Contratação de serviço', 'Contratação de serviço'),
         ('Outro', 'Outro'),
     ]
@@ -33,10 +37,13 @@ class Compra(models.Model):
     categoria = models.CharField(choices=escolha_categoria, max_length=30, blank=True)
     nivel_utilidade = models.CharField(choices=escolha_nivel_utilidade, max_length=30, blank=True)
     metodo_pagamento = models.CharField(choices=escolha_metodo_pagamento, max_length=20, blank=False)
+    descricao = models.CharField(max_length=150, blank=True)
 
     def save(self, *args, **kwargs):
         if self.categoria == '':
             self.categoria = '-'
         if self.nivel_utilidade == '':
             self.nivel_utilidade = '-'
+        if self.descricao == '':
+            self.descricao = '-'
         super().save(*args, **kwargs)
