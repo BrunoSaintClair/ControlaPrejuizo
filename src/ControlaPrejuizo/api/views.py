@@ -74,3 +74,21 @@ def filtrar_metodo_pagamento(request, metodo_pagamento):
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = CompraSerializer(compras, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def filtrar_categoria(request, categoria):
+    try:
+        compras = Compra.objects.filter(categoria=categoria)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = CompraSerializer(compras, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def filtrar_utilidade(request, utilidade):
+    try:
+        compras = Compra.objects.filter(nivel_utilidade=utilidade)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = CompraSerializer(compras, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
