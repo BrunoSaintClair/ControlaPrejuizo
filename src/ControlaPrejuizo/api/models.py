@@ -27,8 +27,8 @@ class Compra(models.Model):
 
     escolha_nivel_utilidade = [
         ('Fútil', 'Fútil'),
-        ('Útil necessário', 'Útil necessário'),
-        ('Útil não necessário', 'Útil não necessário'),
+        ('Útil e necessário', 'Útil e necessário'),
+        ('Útil, porém não necessário', 'Útil, porém não necessário'),
     ]
 
     produto = models.CharField(max_length=100, blank=False)
