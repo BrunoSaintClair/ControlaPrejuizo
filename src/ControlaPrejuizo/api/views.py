@@ -27,18 +27,6 @@ def visualizar_compra(request, id_compra):
     serializer = CompraSerializer(compra)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
-@api_view(['PUT'])
-def editar_compra(request, id_compra):
-    try:
-        compra = Compra.objects.get(pk=id_compra)
-    except:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-    compra_editada = CompraSerializer(compra, data=request.data)
-    if compra_editada.is_valid():
-        compra_editada.save()
-        return Response(compra_editada.data, status=status.HTTP_200_OK)
-    return Response(status=status.HTTP_400_BAD_REQUEST)
-
 @api_view(['DELETE'])
 def apagar_compra(request, id_compra):
     try:
@@ -92,3 +80,27 @@ def filtrar_utilidade(request, utilidade):
         return Response(status=status.HTTP_404_NOT_FOUND)
     serializer = CompraSerializer(compras, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['PUT'])
+def editar_compra(request, id_compra):
+    try:
+        compra = Compra.objects.get(pk=id_compra)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    compra_editada = CompraSerializer(compra, data=request.data)
+    if compra_editada.is_valid():
+        compra_editada.save()
+        return Response(compra_editada.data, status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['PATCH'])
+def editar_campo(request, id_compra, campo):
+    try:
+        compra = Compra.objects.get(pk=id_compra)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    compra_editada = CompraSerializer(compra, data={campo: request.data[campo]}, partial=True)
+    if compra_editada.is_valid():
+        compra_editada.save()
+        return Response(compra_editada.data, status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
