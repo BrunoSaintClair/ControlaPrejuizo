@@ -34,16 +34,7 @@ class Compra(models.Model):
     produto = models.CharField(max_length=100, blank=False)
     valor = models.FloatField(blank=False)
     data_compra = models.DateField(default=datetime.date.today)
-    categoria = models.CharField(choices=escolha_categoria, max_length=30, blank=True)
-    nivel_utilidade = models.CharField(choices=escolha_nivel_utilidade, max_length=30, blank=True)
+    categoria = models.CharField(choices=escolha_categoria, max_length=30, blank=True, default='-')
+    nivel_utilidade = models.CharField(choices=escolha_nivel_utilidade, max_length=30, blank=True, default='-')
     metodo_pagamento = models.CharField(choices=escolha_metodo_pagamento, max_length=20, blank=False)
-    descricao = models.CharField(max_length=150, blank=True)
-
-    def save(self, *args, **kwargs):
-        if self.categoria == '':
-            self.categoria = '-'
-        if self.nivel_utilidade == '':
-            self.nivel_utilidade = '-'
-        if self.descricao == '':
-            self.descricao = '-'
-        super().save(*args, **kwargs)
+    descricao = models.CharField(max_length=150, blank=True, default='-')
