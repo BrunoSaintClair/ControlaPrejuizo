@@ -10,6 +10,7 @@ urlpatterns = [
     path('apagar-compra/<int:id_compra>/', apagar_compra, name='apagar_compra'),
     path('filtrar-compras/ano/<int:ano>/', filtrar_compras_ano, name='filtrar_compras_ano'),
     path('filtrar-compras/mes/<int:mes>-<int:ano>/', filtrar_compras_mes, name='filtrar_compras_mes'),
+    path('filtrar-compras/<int:dia_inicio>-<int:mes_inicio>-<int:ano_inicio>/<int:dia_limite>-<int:mes_limite>-<int:ano_limite>/', filtrar_compras_periodo, name='filtrar_compras_periodo'),
     path('filtrar-compras/metodo-pagamento/<str:metodo_pagamento>/', filtrar_metodo_pagamento, name='filtrar_metodo-pagamento'),
     path('filtrar-compras/categoria/<str:categoria>/', filtrar_categoria, name='filtrar_categoria'),
     path('filtrar-compras/utilidade/<str:utilidade>/', filtrar_utilidade, name='filtrar_utilidade'),

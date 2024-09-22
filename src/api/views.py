@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Compra
 from .serializers import CompraSerializer
+from datetime import date
 
 @api_view(['GET'])
 def listar_compras(request):
@@ -104,3 +105,14 @@ def editar_campo(request, id_compra, campo):
         compra_editada.save()
         return Response(compra_editada.data, status=status.HTTP_200_OK)
     return Response(status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def filtrar_compras_periodo(request, dia_inicio, dia_limite, mes_inicio, ano_inicio, mes_limite, ano_limite):
+    try:
+        data_inicio = date(ano_inicio, mes_inicio, dia_inicio)
+        data_limite = date(ano_limite, mes_limite, dia_limite)
+        compras = Compra.objects.filter(data_compra__range=(data_inicio, data_limite))
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = CompraSerializer(compras, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
