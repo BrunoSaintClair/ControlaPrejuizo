@@ -25,16 +25,9 @@ class Compra(models.Model):
         ('Outro', 'Outro'),
     ]
 
-    escolha_nivel_utilidade = [
-        ('Fútil', 'Fútil'),
-        ('Útil e necessário', 'Útil e necessário'),
-        ('Útil, porém não necessário', 'Útil, porém não necessário'),
-    ]
-
     produto = models.CharField(max_length=100, blank=False)
     valor = models.FloatField(blank=False)
     data_compra = models.DateField(default=datetime.date.today)
     categoria = models.CharField(choices=escolha_categoria, max_length=30, blank=True, default='-')
-    nivel_utilidade = models.CharField(choices=escolha_nivel_utilidade, max_length=30, blank=True, default='-')
     metodo_pagamento = models.CharField(choices=escolha_metodo_pagamento, max_length=20, blank=False)
     descricao = models.CharField(max_length=150, blank=True, default='-')

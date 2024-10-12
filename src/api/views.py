@@ -73,15 +73,6 @@ def filtrar_categoria(request, categoria):
     serializer = CompraSerializer(compras, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
-@api_view(['GET'])
-def filtrar_utilidade(request, utilidade):
-    try:
-        compras = Compra.objects.filter(nivel_utilidade=utilidade)
-    except:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-    serializer = CompraSerializer(compras, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
-
 @api_view(['PUT'])
 def editar_compra(request, id_compra):
     try:

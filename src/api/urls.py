@@ -11,7 +11,6 @@ urlpatterns = [
     path('filtrar/periodo/<int:dia_inicio>-<int:mes_inicio>-<int:ano_inicio>/<int:dia_limite>-<int:mes_limite>-<int:ano_limite>/', filtrar_compras_periodo, name='filtrar_compras_periodo'),
     path('filtrar/metodo-pagamento/<str:metodo_pagamento>/', filtrar_metodo_pagamento, name='filtrar_metodo-pagamento'),
     path('filtrar/categoria/<str:categoria>/', filtrar_categoria, name='filtrar_categoria'),
-    path('filtrar/utilidade/<str:utilidade>/', filtrar_utilidade, name='filtrar_utilidade'),
 
     # POST
     path('adicionar/', adicionar_compra, name='adicionar_compra'),
